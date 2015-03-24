@@ -1,0 +1,197 @@
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}css/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" href="{{ STATIC_URL }}css/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen"/>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+            
+            <!-- Custom CSS -->
+            <link href="{{ STATIC_URL }}css/grayscale.css" rel="stylesheet">
+                
+                <!-- Custom Fonts -->
+                <link href="{{ STATIC_URL }}font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+                    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+                        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+                            
+                            
+                            
+                            
+    </head>
+    
+    
+    <body>
+        
+        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="{% url 'home' %}" >
+                        <i class="fa fa-play-circle"></i>  <span class="light">Dark</span>Room
+                    </a>
+                </div>
+                
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        <li><a href="{% url 'upload' %}" class="">Upload</a></li>
+                        <li><a href="{% url 'contact' %}" class="">Edit Images</a></li>
+                        <li><a href="{% url 'settings' %}" class="">Settings</a></li>
+                        <li><a href="{% url 'logout' %}" class="">Logout</a></li>            </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        
+        
+        
+        <!-- Intro Header -->
+        <header class="upload">
+            <div class="intro-body">
+                <div class="container-center">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            
+                            <div class="container home">
+                                
+                                {% for picture in pictures %}
+                                {% if forloop.counter0|divisibleby:2 %}
+                                <div class="row">
+                                    {% endif %}
+                                
+                                
+                                
+                                    <div class="col-lg-4 col-sm-6 col-xs-12">
+                                        <a href="/media/{{ picture.photo }}">
+                                            <img class="thumbnail img-responsive" id="image{{forloop.counter0}}" src="/media/{{ picture.photo }}" height="600" width="800"/>
+                                        </a>
+                                    </div>
+                               
+                                
+                                {%if forloop.counter|divisibleby:2 %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            
+                            {% if pictures|length == 0 %}
+                            
+                            <div class="container-fluid login">
+                                <div class="row-fluid">
+                                    <div class="span12">
+                        
+                                        <div class="hero-unit">
+                                            <h2>
+                                                This is Your Album
+                                            </h2>
+                                            <h4>
+                                                It is Currently Empty
+                                            </h4>
+                                            
+                                            <p>
+                                            Get Started Uploading Photos by clicking the 'Upload Photo' button.
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            
+                                            <a class="btn btn-primary btn-large" href="{% url 'upload' %}">Upload Photo</a>
+                                            </p>                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                {% endif %}
+                                
+                                <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+                                    <filter id="myfilter">
+                                        
+                                        <!-- Brightness -->
+                                        <feComponentTransfer>
+                                            <feFuncR type="linear" slope="4"/>
+                                            <feFuncG type="linear" slope="4"/>
+                                            <feFuncB type="linear" slope="4"/>
+                                        </feComponentTransfer>
+                                        
+                                        
+                                    </filter>
+                                </svg>
+                                
+                                <script language="JavaScript">
+                                    
+                                    
+                                    $(document).ready(function() {
+                                                      $('a.edit').click(function(){
+                                                                        $(this).siblings('input').show();
+                                                                        $(this).hide();
+                                                                        });
+                                                      
+                                                      
+                                                      $('input[type=range]').change(function (){
+                                                                                    
+                                                                                    amount = this.value/100;
+                                                                                    amount_percentage = this.value + '%';
+                                                                                    console.log(amount_percentage + '   ' + amount);
+                                                                                    image = $(this).siblings().find('img');
+                                                                                    image.css({'filter' : 'url(#myfilter)'});
+                                                                                    image.css({'filter' : 'brightness(' + amount + ')'});
+                                                                                    image.css({'-webkit-filter' : 'brightness(' + amount_percentage + ')'});
+                                                                                    image.css({'-moz-filter'    : 'brightness(' + amount_percentage + ')' });
+                                                                                    });
+                                                      
+                                                      
+                                                      $("a.grouped_elements").fancybox();
+                                                      
+                                                      });
+                                                      
+                                                      
+                                    </script>
+                                
+                                
+                            </div>
+
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        
+        
+        <!-- Footer -->
+        <footer>
+            <div class="container text-center">
+                <p>DarkRoom 2014</p>
+            </div>
+        </footer>
+        
+        <!-- jQuery -->
+        <script src="{{ STATIC_URL }}js/jquery.js"></script>
+        
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        
+        <!-- Plugin JavaScript -->
+        <script src="{{ STATIC_URL }}js/jquery.easing.min.js"></script>
+        
+        <!-- Custom Theme JavaScript -->
+        <script src="{{ STATIC_URL }}js/grayscale.js"></script>
+</body>
+
+
+

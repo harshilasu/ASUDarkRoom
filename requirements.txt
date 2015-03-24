@@ -1,0 +1,13 @@
+django==1.7.1
+psycopg2==2.5.4
+pillow==2.6.1
+pyOpenSSL
+bcrypt
+django-admin-bootstrapped==2.1.0
+django-bootstrap-toolkit==2.15.0
+django-bootstrap3
+django_extensions
+django-toolbelt
+whitenoise
+Werkzeug
+coverage

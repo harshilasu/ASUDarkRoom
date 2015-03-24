@@ -1,0 +1,91 @@
+<head>
+<!-- Bootstrap Core CSS -->
+<link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{ STATIC_URL }}css/grayscale.css" rel="stylesheet">
+        
+        <!-- Custom Fonts -->
+        <link href="{{ STATIC_URL }}font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+            <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+                <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+
+
+
+</head>
+
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="{% url 'home' %}" >
+                <i class="fa fa-play-circle"></i>  <span class="light">Dark</span>Room
+            </a>
+        </div>
+        
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li><a href="{% url 'upload' %}" class="">Upload</a></li>
+                <li><a href="{% url 'contact' %}" class="">Edit Images</a></li>
+                <li><a href="{% url 'settings' %}" class="">Settings</a></li>
+                <li><a href="{% url 'logout' %}" class="">Logout</a></li>            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Intro Header -->
+<header class="upload">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    
+                    <div class="span3">
+                        <h1>Upload new image</h1>
+                        <center>
+                        <form enctype="multipart/form-data" action="" method="post">
+                            {% csrf_token %}
+                           
+                            {{ form.as_p }}
+                            <br/>
+                            <input class="pull-center" type="submit" value="Submit" style="align-center"/>
+                        </form>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>DarkRoom 2014</p>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="{{ STATIC_URL }}js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{{ STATIC_URL }}js/jquery.easing.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="{{ STATIC_URL }}js/grayscale.js"></script>
+
+</body>
